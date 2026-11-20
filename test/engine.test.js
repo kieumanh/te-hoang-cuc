@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {start,legal,play,replay,scoreGo,suggest} from '../src/engine.js';
+import {puzzle,ranks,eligible,stats} from '../src/academy.js';
+test('Go captures, refuses occupied points and counts two passes',()=>{const s=start('go');for(const t of [1,0,9])assert.ok(play(s,{t}));assert.equal(s.b[0],0);assert.equal(s.taken[0],1);assert.equal(play(s,{t:0}),false);play(s,{pass:true});play(s,{pass:true});assert.equal(s.end,1);assert.deepEqual(replay('go',9,s.moves).b,s.b);assert.equal(scoreGo(s).white,6.5)});
+test('Go ko and suicide',()=>{const s=start('go');for(const t of [1,2,9,10,19,20,80,12])assert.ok(play(s,{t}));assert.ok(play(s,{t:11}));assert.equal(play(s,{t:10}),false)});
+test('chess enforces mate and legal opening',()=>{const s=start('chess');assert.equal(legal(s).length,20);for(const [f,t] of [[53,45],[12,28],[54,38],[3,39]])assert.ok(play(s,{f,t}));assert.equal(s.end,-1)});
+test('xiangqi opening, horse leg, facing generals',()=>{const s=start('xiangqi');assert.equal(legal(s).length,44);assert.ok(legal(s).some(m=>m.f===82&&m.t===65));s.b[73]={side:1,p:'p'};assert.ok(!legal(s).some(m=>m.f===82&&m.t===63));s.b=Array(90).fill(null);s.b[4]={p:'k',side:-1};s.b[85]={p:'k',side:1};s.b[49]={p:'r',side:1};assert.ok(!legal(s).some(m=>m.f===49&&m.t===50))});
+test('every game offers playable local advice',()=>{for(const g of ['go','xiangqi','chess']){const s=start(g);assert.ok(play(s,suggest(s,3)));assert.equal(s.moves.length,1)}});
+test('ten studies and progression gates',()=>{for(let i=0;i<ranks.length;i++)assert.equal(puzzle(i).b[puzzle(i).answer],0);const e=[{type:'lesson',level:0},...[0,1,1].map(rival=>({type:'match',mode:'ai',rival,level:0,result:1}))];assert.ok(eligible(e,0));assert.equal(stats(e).rank,0);assert.equal(stats([...e,{type:'exam',level:0}]).rank,1)});
