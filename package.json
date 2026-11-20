@@ -1,1 +1,17 @@
-{"name":"te-hoang-cuc","version":"1.0.0","private":true,"type":"module","scripts":{"build":"node scripts/build.mjs","test":"node --test"},"dependencies":{"chess.js":"1.4.0"},"devDependencies":{"esbuild":"0.25.12"}}
+{
+  "name": "te-hoang-cuc",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "chess.js": "1.4.0",
+    "pikafish-js": "1.0.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.12"
+  }
+}

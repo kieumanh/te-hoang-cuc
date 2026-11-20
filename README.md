@@ -22,3 +22,5 @@ Xem [bộ nhận diện](brand.md). Tranh gốc và biểu trưng nằm trong [p
 ## Sư phụ trực tuyến tùy chọn
 
 Bản production mặc định dùng engine và hướng dẫn tiếng Việt trên thiết bị. Adapter Gemini chỉ bật khi quản trị hạ tầng đã cấu hình secret `GEMINI_FREE_KEY`, model `GEMINI_FREE_MODEL` và xác nhận dự án Google không bật thanh toán bằng `MENTOR_FREE_ONLY=confirmed`. Server giới hạn 75 lượt giải thích mỗi ngày theo giờ Việt Nam cho toàn bộ thành viên, tối đa hai lượt đang chạy. Khi chưa cấu hình, mất kết nối hoặc hết lượt, gợi ý local vẫn hoạt động.
+
+Khi chơi **Cờ tướng → Sư phụ**, có thể bật Pikafish WASM. Lần đầu tải bản w256 khoảng 13 MB. Website xác minh SHA-256 của từng tài nguyên. Trình duyệt lưu lại để dùng ngoại tuyến. Engine tích hợp tiếp quản trên thiết bị thiếu hỗ trợ WASM hoặc khi tải lỗi. Mã nguồn và giấy phép bên thứ ba: [pikafish-js v1.0.0](https://github.com/Maicarons/pikafish-js/tree/v1.0.0), [Pikafish](https://github.com/official-pikafish/Pikafish). Giấy phép và thông báo của wrapper được phát tại /pikafish-LICENSE.txt và /pikafish-NOTICE.txt.
